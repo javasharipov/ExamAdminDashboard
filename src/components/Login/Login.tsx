@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Login: React.FC = () => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const [error, setError] = useState('')
-	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const navigate = useNavigate()
+
+	useEffect(() => {
+		if (localStorage.getItem('access_token')) {
+			navigate('/admin/create-products', { replace: true })
+		}
+	}, [navigate])
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -15,15 +20,10 @@ const Login: React.FC = () => {
 				'access_token',
 				'yascdscvddvvdvregrtfdsxacsvfdrtgfsac'
 			)
-			setIsLoggedIn(true)
 			navigate('/admin/create-products', { replace: true })
 		} else {
 			setError('Invalid username or password')
 		}
-	}
-
-	if (isLoggedIn || localStorage.getItem('access_token')) {
-		return null
 	}
 
 	return (

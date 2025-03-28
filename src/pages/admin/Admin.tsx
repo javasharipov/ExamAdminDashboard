@@ -1,4 +1,5 @@
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { FaSignOutAlt } from 'react-icons/fa'
 import createProductImage from '../../assets/create.svg'
 import manageProductImage from '../../assets/manage.svg'
@@ -6,8 +7,18 @@ import { Toaster } from 'react-hot-toast'
 
 const Admin = () => {
 	const location = useLocation()
-
 	const navigate = useNavigate()
+
+	useEffect(() => {
+		if (!localStorage.getItem('access_token')) {
+			navigate('/login', { replace: true })
+		}
+	}, [navigate])
+
+	const handleLogout = () => {
+		localStorage.removeItem('access_token')
+		navigate('/login', { replace: true })
+	}
 
 	return (
 		<div className=''>
@@ -56,7 +67,7 @@ const Admin = () => {
 				</nav>
 
 				<button
-					onClick={() => navigate('/')}
+					onClick={handleLogout}
 					className='flex items-center gap-2 p-3 rounded hover:bg-[#5a5a5a]  mt-auto transition-colors'
 				>
 					<FaSignOutAlt />
