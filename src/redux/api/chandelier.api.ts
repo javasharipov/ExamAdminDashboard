@@ -22,7 +22,7 @@ const extendedApi = mainApi.injectEndpoints({
 			query: id => {
 				return { url: `/candels/${id}`, method: 'GET' }
 			},
-			providesTags: (result, error, id) => [{ type: 'CANDLE', id }],
+			providesTags: (_, __, id) => [{ type: 'CANDLE', id }],
 		}),
 
 		createCandle: build.mutation<Candle, Omit<Candle, 'id'>>({
@@ -46,14 +46,14 @@ const extendedApi = mainApi.injectEndpoints({
 					body: JSON.stringify(body),
 				}
 			},
-			invalidatesTags: (result, error, { id }) => [{ type: 'CANDLE', id }],
+			invalidatesTags: (_, __, { id }) => [{ type: 'CANDLE', id }],
 		}),
 
 		deleteCandle: build.mutation<void, string>({
 			query: id => {
 				return { url: `/candels/${id}`, method: 'DELETE' }
 			},
-			invalidatesTags: (result, error, id) => [{ type: 'CANDLE', id }],
+			invalidatesTags: (_, __, id) => [{ type: 'CANDLE', id }],
 		}),
 	}),
 

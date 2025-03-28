@@ -4,7 +4,6 @@ import Login from './components/Login/Login'
 import Admin from './pages/admin/Admin'
 import Create from './pages/admin/createproducts/Create'
 import Manage from './pages/admin/manageproducts/Manage'
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 function App() {
 	return (
