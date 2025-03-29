@@ -43,8 +43,6 @@ const Create = () => {
 			desc: formData.desc,
 		}
 
-		console.log('Sending payload:', payload)
-
 		try {
 			const response = await createCandle(payload).unwrap()
 			console.log('Response from API:', response)

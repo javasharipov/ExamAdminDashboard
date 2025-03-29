@@ -20,63 +20,51 @@ const Admin = () => {
 		navigate('/login', { replace: true })
 	}
 
+	const navItems = [
+		{
+			path: '/admin/create-products',
+			label: 'Create product',
+			img: createProductImage,
+		},
+		{
+			path: '/admin/manage-products',
+			label: 'Manage product',
+			img: manageProductImage,
+		},
+	]
+
 	return (
-		<div className=''>
+		<div className='flex'>
 			<Toaster position='top-right' reverseOrder={false} />
-			<div className='h-screen w-[400px] bg-[#454545] text-white p-6 flex flex-col fixed '>
-				<div className='mb-8'>
-					<h1 className='text-2xl font-bold mb-2'>Admin Dashboard</h1>
-				</div>
-
+			<aside className='h-screen w-[400px] bg-[#454545] text-white p-6 flex flex-col fixed'>
+				<h1 className='text-2xl font-bold mb-8'>Admin Dashboard</h1>
 				<nav className='space-y-4'>
-					<div>
+					{navItems.map(({ path, label, img }) => (
 						<Link
-							to='/admin/create-products'
+							key={path}
+							to={path}
 							className={`flex items-center gap-3 p-3 rounded transition-colors ${
-								location.pathname === '/admin/create-products'
+								location.pathname === path
 									? 'bg-[#ffffff46]'
 									: 'hover:bg-[#5a5a5a]'
 							}`}
 						>
-							<img
-								src={createProductImage}
-								alt='Create product'
-								className='w-6 h-6'
-							/>
-							<span>Create product</span>
+							<img src={img} alt={label} className='w-6 h-6' />
+							<span>{label}</span>
 						</Link>
-					</div>
-
-					<div>
-						<Link
-							to='/admin/manage-products'
-							className={`flex items-center gap-3 p-3 rounded transition-colors ${
-								location.pathname === '/admin/manage-products'
-									? 'bg-[#ffffff46]'
-									: 'hover:bg-[#5a5a5a]'
-							}`}
-						>
-							<img
-								src={manageProductImage}
-								alt='Manage product'
-								className='w-6 h-6'
-							/>
-							<span>Manage product</span>
-						</Link>
-					</div>
+					))}
 				</nav>
-
 				<button
 					onClick={handleLogout}
-					className='flex items-center gap-2 p-3 rounded hover:bg-[#5a5a5a]  mt-auto transition-colors'
+					className='flex items-center gap-2 p-3 rounded hover:bg-[#5a5a5a] mt-auto transition-colors'
 				>
 					<FaSignOutAlt />
 					<span>Log out</span>
 				</button>
-			</div>
-			<div className='ml-[430px]'>
+			</aside>
+			<main className='ml-[430px] w-full'>
 				<Outlet />
-			</div>
+			</main>
 		</div>
 	)
 }

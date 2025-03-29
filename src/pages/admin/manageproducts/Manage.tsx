@@ -91,10 +91,7 @@ const DeleteButton = ({ id }: { id: string }) => {
 		if (window.confirm('Are you sure you want to delete this candle?')) {
 			try {
 				await deleteCandle(id).unwrap()
-				console.log('Candle deleted successfully')
-			} catch (error) {
-				console.error('Error deleting candle:', error)
-			}
+			} catch (error) {}
 		}
 	}
 
@@ -131,9 +128,7 @@ const EditModal = ({
 			await updateCandle({ id: candle.id, title, image, price }).unwrap()
 			alert('Candle updated successfully!')
 			onClose()
-		} catch (error) {
-			console.error('Error updating candle:', error)
-		}
+		} catch (error) {}
 	}
 
 	return (

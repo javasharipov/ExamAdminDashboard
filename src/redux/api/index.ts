@@ -6,9 +6,7 @@ export const mainApi = createApi({
 		baseUrl: 'https://67e52ea518194932a584f10d.mockapi.io',
 		prepareHeaders: headers => {
 			const token = localStorage.getItem('access_token')
-			if (token) {
-				headers.set('Authorization', `Bearer ${token}`)
-			}
+			if (token) headers.set('Authorization', `Bearer ${token}`)
 			return headers
 		},
 	}),
@@ -16,9 +14,7 @@ export const mainApi = createApi({
 	endpoints: () => ({}),
 })
 
-export const {
-	usePrefetch,
-	util: { updateQueryData, invalidateTags },
-} = mainApi
+export const { usePrefetch } = mainApi
+export const { updateQueryData, invalidateTags } = mainApi.util
 
 export type MainApi = typeof mainApi
